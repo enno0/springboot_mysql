@@ -12,10 +12,10 @@
         <meta charset="UTF-8">
         <title>Students</title>
         <link
-	        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	        rel="stylesheet"
-	        integrity3="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	        crossorigin3="anonymous">
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
 
     </head>
     <body>
@@ -41,8 +41,8 @@
                     <td>${student.city}</td>
                     <td>${student.age}</td>
                     <td>
-                        <a href="edit?id=<c:out value='${stuudint.id}'/>">Update</a>
-                        <a href="delete/=<c:out value='${stuudint.id}'/>">delete</a>              
+                        <a href="edit?id=<c:out value='${student.id}'/>">Update</a>
+                        <a href="delete/<c:out value='${student.id}'/>">Delete</a>             
                 
                     </td>
                 </tr>
