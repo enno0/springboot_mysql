@@ -1,31 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-  
-<%@ page import="java.util.Date"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
 
-<%-- <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %> --%>
 
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %> 
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>Students</title>
-       <link
+        <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous">
 
     </head>
-    <body>
-    <h1>Edit a student</h1>
-    <form:form  method="POST" action="/update?id" modelAttribute="student">
 
+    <body>
+    <h1>Create a student</h1>
+    <form:form action="saveStudent" method="POST" modelAttribute="students">
         <table>
             <tr>
-                <input type="text" id="fname" name="id" value="${student.id}" hidden="true">
-
                 <td>Student Number</td>
                 <td><form:input path="student_id"></td>
             </tr>
@@ -42,10 +37,10 @@
                 <td><form:input path="age"></td>
             </tr>
             <tr>
-                <td><input type="submit" value="update"></td>
+                <td><input type="submit" value="addStudent"></td>
             </tr>
 
-</table> 
+        </table> 
     
     </form:form>
 

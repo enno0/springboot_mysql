@@ -1,31 +1,26 @@
 package com.enno.models;
 
 public class Student {
+
     private int id;
-    private String student_id;
+    private int student_id;
     private String name;
     private String city;
-    private String age;
+    private int age;
 
     public int getId() {
         return id;
-    }
-
-    @Override
-    public String toString() {
-        return "Student [id=" + id + ", student_id=" + student_id + ", name=" + name + ", city=" + city + ", age=" + age
-                + "]";
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public String getStudent_id() {
+    public int getStudent_id() {
         return student_id;
     }
 
-    public void setStudent_id(String student_id) {
+    public void setStudent_id(int student_id) {
         this.student_id = student_id;
     }
 
@@ -45,12 +40,18 @@ public class Student {
         this.city = city;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return "Student [id=" + id + ", student_id=" + student_id + ", name=" + name + ", city=" + city + ", age=" + age
+                + "]";
     }
 
 }

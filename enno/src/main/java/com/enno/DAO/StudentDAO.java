@@ -5,7 +5,7 @@ import java.util.List;
 import com.enno.models.Student;
 
 public interface StudentDAO {
-    List<Student> getAllStudent();
+    List<Student> getAllStudents();
 
     void saveStudent(Student student);
 
@@ -13,6 +13,5 @@ public interface StudentDAO {
 
     int updateStudent(Student student);
 
-    int delete(int id);
-
+    int deleteStudent(int id);
 }

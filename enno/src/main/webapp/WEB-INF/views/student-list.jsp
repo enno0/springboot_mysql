@@ -1,52 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-  
-<%@ page import="java.util.Date"%>
-
-<%-- <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %> --%>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+    pageEncoding="UTF-8"%>
+   <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Students</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-            crossorigin="anonymous">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
 
-    </head>
-    <body>
-        <h1>Student List</h1>
-        <%-- <p> ${students } </p> <br><br><br>--%>
-        <form method="POST" action = "/addStudent">
-        <input type = "submit" value = "Add Student" />
-        </form>
-        <br><br><br>
-        <table border="1">
-        <tr>
-                <th>Id</th>
-                <th>student_id</th>
-                <th>name</th>
-                <th>city</th>
-                <th>age</th>
-        </tr>
-            <c:forEach var ="student" items="${students}">
-                <tr>
-                    <td>${student.id}</td>
-                    <td>${student.student_id}</td>
-                    <td>${student.name}</td>
-                    <td>${student.city}</td>
-                    <td>${student.age}</td>
-                    <td>
-                        <a href="edit?id=<c:out value='${student.id}'/>">Update</a>
-                        <a href="delete/<c:out value='${student.id}'/>">Delete</a>             
-                
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-    <body/>
+<h1>Create Student  </h1>
+
+ 
+<form:form method="POST" modelAttribute="student" action="saveStudent">
+      <table>
+          <tr>
+              <td>student number:</td>
+              <td><form:input path="student_id" /></td>
+          </tr>
+          <tr>
+              <td>Name:</td>
+              <td><form:input path="name" /></td>
+          </tr>
+           <tr>
+              <td>City:</td>
+              <td><form:input path="city" /></td>
+          </tr>
+           <tr>
+              <td>Age:</td>
+              <td><form:input path="age" /></td>
+          </tr>
+          <tr>
+              <td colspan="2">
+                  <input type="submit" value="Save Changes" />
+              </td>
+          </tr>
+      </table>
+  </form:form>
+
+
+
+</body>
 </html>
