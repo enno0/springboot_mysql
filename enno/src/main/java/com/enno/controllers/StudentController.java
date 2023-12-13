@@ -2,28 +2,29 @@ package com.enno.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.enno.DAO.StudentDAO;
+import com.enno.dto.StudentDTO;
 import com.enno.models.Student;
 
 @Controller
 public class StudentController {
 
-    private final StudentDAO studentDAO;
+    @Autowired
+    private StudentDAO studentDAO;
 
-    @GetMapping("/hello")
-    public String hello(Model model) {
-        model.addAttribute("message", "Hello, Spring Boot!");
-        return "hello"; // Template name without file extension
-    }
+    // private final StudentDAO studentDAO;
 
-    public StudentController(StudentDAO studentDAO) {
-        this.studentDAO = studentDAO;
-    }
+    // public StudentController(StudentDAO studentDAO) {
+    // this.studentDAO = studentDAO;
+    // }
 
     @GetMapping("/showStudent")
     public String showStudentInfo(Model model) {
@@ -34,7 +35,7 @@ public class StudentController {
 
     @GetMapping("/addStudent")
     public String addStudent(Model model) {
-        model.addAttribute("student", new Student()); // Instantiate a new Student object
+        model.addAttribute("student", new StudentDTO()); // Instantiate a new Student object
         return "add-student";
     }
 
@@ -42,5 +43,24 @@ public class StudentController {
     public String saveStudent(Student student) {
         studentDAO.saveStudent(student);
         return "redirect:/showStudent";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editStudent(@PathVariable int id, Model model) {
+        Student student = studentDAO.getStudentById(id);
+        model.addAttribute("student", student);
+        return "edit-student";
+    }
+
+    @PostMapping("/update")
+    public String updateStudent(Student student) {
+        studentDAO.updateStudent(student);
+        return "redirect:" + "/showStudent";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteStudent(@PathVariable int id) {
+        studentDAO.deleteStudent(id);
+        return "redirect:" + "/showStudent";
     }
 }

@@ -6,8 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @EnableWebMvc
 @Configuration
@@ -17,14 +19,14 @@ public class Appconfig implements WebMvcConfigurer {
     @Autowired
     ApplicationContext applicationContext;
 
-    // @Bean
-    // public ViewResolver viewResolver() {
-    // InternalResourceViewResolver ivr = new InternalResourceViewResolver();
-    // ivr.setPrefix("/WEB-INF/views/");
-    // ivr.setSuffix(".jsp");
-    // return ivr;
+    @Bean
+    public ViewResolver viewResolver() {
+        InternalResourceViewResolver ivr = new InternalResourceViewResolver();
+        ivr.setPrefix("/resources/templates");
+        ivr.setSuffix(".html");
+        return ivr;
 
-    // }
+    }
 
     @Bean
     DriverManagerDataSource getDataSource() {
