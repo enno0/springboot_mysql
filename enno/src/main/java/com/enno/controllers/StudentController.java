@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.enno.DAO.StudentDAO;
 import com.enno.dto.StudentDTO;
@@ -18,13 +17,16 @@ import com.enno.models.Student;
 public class StudentController {
 
     @Autowired
+    ExceptionContr exceptionContr;
+
+    @Autowired
     private StudentDAO studentDAO;
 
-    // private final StudentDAO studentDAO;
-
-    // public StudentController(StudentDAO studentDAO) {
-    // this.studentDAO = studentDAO;
-    // }
+    @GetMapping("/")
+    public String Home(Model model) {
+        model.addAttribute("message", "Welcome :]");
+        return "hello";
+    }
 
     @GetMapping("/showStudent")
     public String showStudentInfo(Model model) {
@@ -63,4 +65,21 @@ public class StudentController {
         studentDAO.deleteStudent(id);
         return "redirect:" + "/showStudent";
     }
+
+    @GetMapping("/logout")
+    public String logout() {
+        // Logic to perform logout actions if needed (invalidate session, clear cookies,
+        // etc.)
+        // You can add custom logout logic here
+
+        // Redirect to the logout success page
+        return "redirect:/logout-success";
+    }
+
+    @GetMapping("/logout-success")
+    public String logoutSuccess() {
+        // Render the logout success page
+        return "logout";
+    }
+
 }
