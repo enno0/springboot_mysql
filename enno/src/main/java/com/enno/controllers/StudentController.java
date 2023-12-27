@@ -28,6 +28,12 @@ public class StudentController {
         return "hello";
     }
 
+    @GetMapping("/login")
+    public String Home2(Model model) {
+        model.addAttribute("message", "Welcome :]");
+        return "logout";
+    }
+
     @GetMapping("/showStudent")
     public String showStudentInfo(Model model) {
         List<Student> students = studentDAO.getAllStudents();
@@ -82,4 +88,8 @@ public class StudentController {
         return "logout";
     }
 
+    @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "access-denied";
+    }
 }

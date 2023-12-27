@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -18,8 +19,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
                 .authorizeRequests()
-                .requestMatchers("/**", "/student/**").hasRole("USER")
+                .requestMatchers("/login").permitAll()
+                .and()
+                .authorizeRequests()
+                .requestMatchers("/", "/login", "/showStudent").hasRole("USER")
+                .requestMatchers("/saveStudent", "/edit/**", "/delete/**").hasRole("ADMIN")
+                .requestMatchers("/saveStudent", "/edit/**", "/delete/**").authenticated()
+
                 .and()
                 .formLogin()
                 .and()
@@ -27,7 +37,14 @@ public class SecurityConfig {
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout")
                 .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
+                .deleteCookies("JSESSIONID")
+                .and()
+                .exceptionHandling()
+                .accessDeniedHandler((request, response, accessDeniedException) -> {
+                    // Log details about the denied access
+                    accessDeniedException.printStackTrace();
+                    response.sendRedirect("/access-denied");
+                });
 
         return http.build();
     }
@@ -43,8 +60,19 @@ public class SecurityConfig {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         // Use BCryptPasswordEncoder to encode passwords
         manager.createUser(
-                User.withUsername("enno123").password(passwordEncoder().encode("123123")).roles("USER", "ADMIN")
+                User.withUsername("enno123")
+                        .password(passwordEncoder().encode("123123"))
+                        .roles("ADMIN", "USER")
                         .build());
+        manager.createUser(
+                User.withUsername("kamal")
+                        .password(passwordEncoder().encode("123123"))
+                        .roles("USER")
+                        .build()
+
+        );
+
         return manager;
     }
+
 }

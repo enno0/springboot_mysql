@@ -3,9 +3,9 @@ package com.enno.dto;
 public class StudentDTO {
 
     private int student_id = 1000;
-    private String name = "Muhammed Essa";
-    private String city = "Kirkuk";
-    private int age = 36;
+    private String name = "enno";
+    private String city = "cairo msn3 al rgal";
+    private int age = 25;
 
     public int getStudent_id() {
         return student_id;

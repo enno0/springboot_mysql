@@ -2,12 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Student List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Applight Template By W3 Template</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css"
+    />
+    <link rel="stylesheet" href="css/animate.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+      integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+      crossorigin="anonymous"
+    />
+    <!-- Font Google -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
 
   <body>
-    <h1><a th:href="@{/addStudent}">Student List</a></h1>
-    <h5><a th:href="@{/logout}">Logout</a></h5>
+    <head>
+      <nav class="nav">
+        <a class="nav-link active" aria-current="page" th:href="@{/addStudent}"
+          >addStudent</a
+        >
+        <a class="nav-link disabled">🎃🎃🎃</a>
+
+        <a class="nav-link" href="#">🇵🇸🇵🇸🇵🇸</a>
+        <a class="nav-link" th:href="@{/logout}">Logout</a>
+      </nav>
+    </head>
 
     <table border="1">
       <tr>
@@ -27,6 +61,11 @@
         <td>
           <a th:href="@{/edit/{id}(id=*{student.id})}">Update</a>
           <a th:href="@{/delete/{id}(id=${student.id})}">Delete</a>
+          <input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}"
+          />
         </td>
       </tr>
     </table>
