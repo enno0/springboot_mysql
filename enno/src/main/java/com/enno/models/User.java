@@ -7,12 +7,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Student {
-
+public class User {
+    private int Enabled;
+    private String FullName;
+    private String UserName;
+    private String Password;
     private int id;
-    private int student_id;
-    private String name;
-    private String city;
-    private int age;
-
 }

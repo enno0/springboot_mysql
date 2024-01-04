@@ -14,45 +14,8 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
+
 public class SecurityConfig {
-
-    /**
-     * @param http
-     * @return
-     * @throws Exception
-     */
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                .and()
-                .authorizeRequests()
-                .requestMatchers("/login").permitAll()
-                .and()
-                .authorizeRequests()
-                .requestMatchers("/", "/login", "/showStudent").hasRole("USER")
-                .requestMatchers("/saveStudent", "/edit/**", "/delete/**").hasRole("ADMIN")
-                .requestMatchers("/saveStudent", "/edit/**", "/delete/**").authenticated()
-
-                .and()
-                .formLogin()
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .and()
-                .exceptionHandling()
-                .accessDeniedHandler((request, response, accessDeniedException) -> {
-                    // Log details about the denied access
-                    accessDeniedException.printStackTrace();
-                    response.sendRedirect("/access-denied");
-                });
-
-        return http.build();
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -78,6 +41,43 @@ public class SecurityConfig {
         );
 
         return manager;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
+                //
+                .authorizeRequests()
+                .requestMatchers("/login").permitAll()
+                .and()
+                .authorizeRequests()
+                .requestMatchers("/", "/login", "/showStudent").hasRole("USER")
+                .requestMatchers("/saveStudent", "/edit/**", "/delete/**", "/User/**").hasRole("ADMIN")
+                .requestMatchers("/saveStudent", "/edit/**", "/delete/**", "/User/**").authenticated()
+                .and()
+                //
+                .formLogin()
+                .and()
+
+                //
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .and()
+                //
+                .exceptionHandling()
+                .accessDeniedHandler((request, response, accessDeniedException) -> {
+                    // Log details about the denied access
+                    accessDeniedException.printStackTrace();
+                    response.sendRedirect("/access-denied");
+                });
+
+        return http.build();
     }
 
 }

@@ -14,13 +14,21 @@ import com.enno.dto.StudentDTO;
 import com.enno.models.Student;
 
 @Controller
+// @RequestMapping("/Student")
 public class StudentController {
+    // @Autowired
+    // private UserDAO userDAO;
 
     @Autowired
     ExceptionContr exceptionContr;
 
     @Autowired
     private StudentDAO studentDAO;
+
+    @GetMapping("/UserMain")
+    public String getMethodName() {
+        return "redirect:" + "/User/showUsers";
+    }
 
     @GetMapping("/")
     public String Home(Model model) {
@@ -92,4 +100,5 @@ public class StudentController {
     public String accessDenied() {
         return "access-denied";
     }
+
 }
