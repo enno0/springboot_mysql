@@ -7,11 +7,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class User {
-    private int Enabled;
-    private String FullName;
+public class UserRole {
+    private int User_Role_Id;
     private String UserName;
-    private String Password;
-    private int id;
-
+    private String Role;
 }

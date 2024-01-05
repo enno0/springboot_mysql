@@ -28,7 +28,7 @@ public class Appconfig implements WebMvcConfigurer {
     // private ApplicationContext applicationContext;
 
     @Bean
-    public ViewResolver viewResolver() {
+    ViewResolver viewResolver() {
         InternalResourceViewResolver ivr = new InternalResourceViewResolver();
         ivr.setPrefix(env.getProperty("spring.mvc.view.prefix"));
         ivr.setSuffix(env.getProperty("spring.mvc.view.suffix"));

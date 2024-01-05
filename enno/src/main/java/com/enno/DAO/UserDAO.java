@@ -15,4 +15,10 @@ public interface UserDAO {
 
     List<User> getAllUsers();
 
+    String getUserByName(String name);
+
+    String getUserB();
+
+    List<String> getUserRoles();
+
 }
