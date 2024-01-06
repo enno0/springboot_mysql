@@ -39,7 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

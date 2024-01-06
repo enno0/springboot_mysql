@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add userR</title>
+  </head>
+
+  <body>
+    <h1>Create userR</h1>
+
+    <form action="/User_Role/saveUserR" method="post" th:object="${UserR}">
+      <table>
+        <tr>
+          <td>UserName:</td>
+          <td><input type="text" th:field="*{UserName}" /></td>
+        </tr>
+        <tr>
+          <td>Role:</td>
+          <td><input type="text" th:field="*{Role}" /></td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <input
+              type="hidden"
+              th:name="${_csrf.parameterName}"
+              th:value="${_csrf.token}"
+            />
+            <input type="submit" value="Save Changes" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

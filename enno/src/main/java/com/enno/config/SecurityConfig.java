@@ -1,21 +1,12 @@
 package com.enno.config;
 
-import java.util.List;
-
 import javax.sql.DataSource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
@@ -27,8 +18,6 @@ public class SecurityConfig {
     DataSource dataSource;
     @Autowired
     UserDaoImp userDaoImp;
-
-    private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
 
     // @Bean
     // PasswordEncoder passwordEncoder() {
@@ -64,8 +53,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .requestMatchers("/", "/login", "/showStudent").hasRole("USER")
-                .requestMatchers("/saveStudent", "/edit/**", "/delete/**", "/User/**").hasRole("ADMIN")
-                .requestMatchers("/saveStudent", "/edit/**", "/delete/**", "/User/**").authenticated()
+                .requestMatchers("/saveStudent", "/edit/**", "/delete/**", "/User/**", "/User_Role/**").hasRole("ADMIN")
+                .requestMatchers("/saveStudent", "/edit/**", "/delete/**", "/User/**", "/User_Role/**").authenticated()
                 .and()
                 //
                 .formLogin()

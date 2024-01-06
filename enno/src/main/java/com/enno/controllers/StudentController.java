@@ -16,8 +16,6 @@ import com.enno.models.Student;
 @Controller
 // @RequestMapping("/Student")
 public class StudentController {
-    // @Autowired
-    // private UserDAO userDAO;
 
     @Autowired
     ExceptionContr exceptionContr;
@@ -28,6 +26,11 @@ public class StudentController {
     @GetMapping("/UserMain")
     public String getMethodName() {
         return "redirect:" + "/User/showUsers";
+    }
+
+    @GetMapping("/UserRoleMain")
+    public String getMethodName2() {
+        return "redirect:" + "/User_Role/showUserR";
     }
 
     @GetMapping("/")

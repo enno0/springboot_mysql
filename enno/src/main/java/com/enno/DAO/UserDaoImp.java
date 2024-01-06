@@ -37,10 +37,10 @@ public class UserDaoImp implements UserDAO {
             jdbcTemplate.update(sql, user.getUserName(), user.getPassword(), user.getFullName(), user.getEnabled());
 
             // Use logging instead of System.out.println for production code
-            logger.info("Student saved!");
+            logger.info("User saved!");
         } catch (DataAccessException e) {
             // Handle exception (e.g., log, throw custom exception, etc.)
-            logger.error("Error saving student", e);
+            logger.error("Error saving User", e);
         }
 
     }

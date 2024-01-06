@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HOME</title>
+    <!-- Font Google -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <head>
+      <nav class="nav">
+        <a
+          class="nav-link active"
+          aria-current="page"
+          th:href="@{/User_Role/addUserR}"
+          >addUser</a
+        >
+        <a class="nav-link disabled">🎃🎃🎃</a>
+
+        <a class="nav-link" href="#">🇵🇸🇵🇸🇵🇸</a>
+        <a class="nav-link" th:href="@{/logout}">Logout</a>
+      </nav>
+    </head>
+
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>UserName</th>
+        <th>Role</th>
+      </tr>
+      <tr th:each="userR : ${userR}">
+        <td th:text="${userR.User_Role_Id}"></td>
+        <td th:text="${userR.UserName}"></td>
+        <td th:text="${userR.Role}"></td>
+        <td>
+          <a th:href="@{/User_Role/editUser/{id}(id=*{userR.User_Role_Id})}"
+            >Update</a
+          >
+          <a th:href="@{/User_Role/delete/{id}(id=${userR.User_Role_Id})}"
+            >Delete</a
+          >
+
+          <input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}"
+          />
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
